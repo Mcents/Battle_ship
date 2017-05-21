@@ -1,3 +1,4 @@
+require 'pry'
 class GameBoard
 
   attr_accessor :valid_locations,
@@ -40,7 +41,4 @@ class GameBoard
       end
       puts "\n"
     end
-
-
-
 end
