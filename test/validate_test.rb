@@ -32,11 +32,7 @@ class TestValidate < Minitest::Test
     player.board.assign_square([1, 3], "S")
 
     assert Validate.ships_not_placed_on_same_square?(player, [1,2], [2,4])
-
   end
-
-
-
 
 
 end

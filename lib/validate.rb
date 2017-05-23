@@ -14,15 +14,15 @@ module Validate
 
   def self.coordinate_fill(coordinate0, coordinate1)
     if coordinate0[0] == coordinate1[0]
-      axis = 1
+      row = 1
     else
-      axis = 0
+      row = 0
     end
-    first, last = [coordinate0[axis], coordinate1[axis]].sort
+    first, last = [coordinate0[row], coordinate1[row]].sort
     (first..last).map do |index|
       nate = Array.new(2)
-      nate[(axis + 1) % 2] = coordinate0[(axis + 1) % 2]
-      nate[axis] = index
+      nate[(row + 1) % 2] = coordinate0[(row + 1) % 2]
+      nate[row] = index
       nate
     end
   end
@@ -54,12 +54,9 @@ module Validate
   end
 
   def self.inbounds?(coordinates, difficulty = 4)
-    if difficulty = 4
-      size = (0..3).to_a
-    end
+    size = (0..3).to_a
     size.include?(coordinates[0]) && size.include?(coordinates[1])
   end
-
 
 
 end

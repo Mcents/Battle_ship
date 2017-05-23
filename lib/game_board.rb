@@ -1,4 +1,4 @@
-require 'pry'
+ require 'pry'
 class GameBoard
 
   attr_accessor :display_board,

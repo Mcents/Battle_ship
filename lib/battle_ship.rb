@@ -6,7 +6,8 @@ require_relative 'validate'
 class BattleShip
   attr_accessor :computer,
                 :human,
-                :cpu_board
+                :cpu_board,
+                :player_board
 
   def initialize
     @messanger = Messanger.new
@@ -17,15 +18,18 @@ class BattleShip
 
   def start_menu
     @messanger.start
-    input = gets.chomp
-
-    if input == "i"
-      @messanger.instructions
-    elsif input == "p"
-      play_game(@computer)
-    elsif input == "q"
-      puts "Thanks for playing."
-      return 0
+    input1 = gets.chomp
+      if input1 == "i"
+        @messanger.instructions
+        start_menu
+      elsif input1 == "p"
+        play_game(@computer)
+      elsif input1 == "q"
+        puts "Thanks for playing."
+        abort
+      else
+      puts "Learn your letters! Try again!"
+      input1 = gets.chomp
     end
   end
 
@@ -34,6 +38,7 @@ class BattleShip
     @new_game.display_board
     cpu_ship_placement
     @messanger.ai_ship_placed
+    player_ship_placement
   end
 
 
@@ -42,13 +47,21 @@ class BattleShip
       valid_placement = false
       until valid_placement
         coordinates = Validate.random_coordinate_generator(ship, 4)
-        valid_placement = cpu_board.place_ship(coordinates)
+        valid_placement = Validate.valid_ship_placement?(cpu_board, ship, coordinates)
       end
+      cpu_board.place_ship(coordinates)
     end
   end
 
+  def player_ship_placement
+    player_board.ships.each do |ship|
+        @messanger.player_place_ships(ship)
+        player_input = gets.to_i
+        player_board.place_ship(player_input)
+
+    end
+  end
 end
 
 final_test = BattleShip.new
 final_test.start_menu
-binding.pry

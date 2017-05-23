@@ -19,5 +19,10 @@ class Messanger
     Enter the squares for the two-unit ship:\n"
   end
 
+  def player_place_ships(ship)
+    puts "Choose the coordinates for your #{ship}-unit ship."
+
+  end
+
 
 end

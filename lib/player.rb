@@ -12,7 +12,6 @@ class Player
     def place_ship(coordinates)
       coordinate_fill = Validate.coordinate_fill(coordinates[0], coordinates[1])
       coordinate_fill.each do |coordinate|
-        binding.pry
         board.assign_square(coordinate, "S")
       end
     end
