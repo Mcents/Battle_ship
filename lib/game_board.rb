@@ -1,44 +1,41 @@
 require 'pry'
 class GameBoard
 
-  attr_accessor :valid_locations,
+  attr_accessor :display_board,
                 :board
 
+
+
     def initialize
-      @valid_locations = %w(A1 A2 A3 A4 B1 B2 B3 B4
-                            C1 C2 C3 C4 D1 D2 D3 D4)
-      @board = ascii_board(full_board)
+      @board=[[" ", " ", " ", " "], [" ", " ", " ", " "], [" ", " ", " ", " "], [" ", " ", " ", " "]]
     end
 
-    def header_and_footer
-      %w(============)
-    end
-
-    def column_labels
-      %w(. 1 2 3 4)
-    end
-
-    def row(letter)
-      [letter, " ", " ", " ", " "]
-    end
-
-    def full_board
-      [header_and_footer,
-       column_labels,
-       row('A'),
-       row('B'),
-       row('C'),
-       row('D'),
-       header_and_footer]
-     end
-
-    def ascii_board(filled_board)
-      filled_board.each do |row|
-        row.each do |item|
-          print item + ' '
-        end
-        puts ''
+    def assign_square(coordinates, status)
+        row, column = coordinates
+        board[row][column] = status
       end
-      puts "\n"
+
+    def display_board
+    puts display = ["===========\n. 1 2 3 4  ", "\nA ", " \nB ", " \nC ", " \nD ", " \n===========\n"]
+    board.each_with_index do |row, row_index|
+      row.each do |column|
+        display[row_index + 1] << "#{column} "
+      end
     end
+    display.join
+  end
+
+    def hit?(coordinates)
+      row, column = coordinates
+      board[row][column] == "S"
+    end
+
+  def attack(coordinates)
+    row, column = coordinates
+    if board[row][column] == "S"
+      assign_square(coordinates, "H")
+    else
+      assign_square(coordinates, "M")
+    end
+  end
 end
