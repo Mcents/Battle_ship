@@ -34,5 +34,18 @@ class TestValidate < Minitest::Test
     assert Validate.ships_not_placed_on_same_square?(player, [1,2], [2,4])
   end
 
+  def test_if_can_find_distance
+
+  assert_equal 3, Validate.distance([0, 0], [0, 3])
+  end
+
+  def test_that_diagonal_placement_is_not_possible
+    player = Player.new(GameBoard.new)
+
+    assert Validate.valid_ship_placement?(player, 3, [[1, 1], [1, 3]])
+    refute Validate.valid_ship_placement?(player, 3, [[2, 2], [3, 3]])
+  end
+
+  def test_to_refute
 
 end

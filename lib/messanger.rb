@@ -21,8 +21,16 @@ class Messanger
 
   def player_place_ships(ship)
     puts "Choose the coordinates for your #{ship}-unit ship."
-
   end
+
+  def incorrect_placement
+    puts "You've placed your coordinates incorrectly. Here are some rules to guide you:\n
+    *Ships cannot wrap around the board
+    *Ships cannot overlap
+    *Ships can be laid either horizontally or vertically
+    *Coordinates must correspond to the first and last units of the ship. (IE: You can’t place a two unit ship at “A1 A3”)"
+  end
+
 
 
 end

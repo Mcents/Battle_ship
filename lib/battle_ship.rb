@@ -29,7 +29,7 @@ class BattleShip
         abort
       else
       puts "Learn your letters! Try again!"
-      input1 = gets.chomp
+      start_menu
     end
   end
 
@@ -39,8 +39,18 @@ class BattleShip
     cpu_ship_placement
     @messanger.ai_ship_placed
     player_ship_placement
+    game_play
   end
 
+  def game_play
+    player_shoot
+  end
+
+  def player_shoot
+    display_both_boards
+
+
+  end
 
   def cpu_ship_placement
     cpu_board.ships.each do |ship|
@@ -55,11 +65,21 @@ class BattleShip
 
   def player_ship_placement
     player_board.ships.each do |ship|
+      valid_placement = false
+      until valid_placement
         @messanger.player_place_ships(ship)
-        player_input = gets.to_i
-        player_board.place_ship(player_input)
-
+        player_input = gets.strip
+        valid_placement = Validate.valid_pair?(player_input) && Validate.valid_ship_placement?(player_board, ship, Validate.clean_coordinates(player_input))
+        @messanger.incorrect_placement if valid_placement == false
+      end
+      player_input = Validate.clean_coordinates(player_input)
+      player_board.place_ship(player_input)
     end
+  end
+
+  def display_both_boards
+    print "Your Board\n #{player_board.board.display_board}"
+    print "Opponents Board\n#{cpu_board.board.display_board.gsub("S", " ")}"
   end
 end
 

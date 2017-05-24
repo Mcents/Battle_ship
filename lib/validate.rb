@@ -11,7 +11,6 @@ module Validate
     coordinates
   end
 
-
   def self.coordinate_fill(coordinate0, coordinate1)
     if coordinate0[0] == coordinate1[0]
       row = 1
@@ -53,9 +52,42 @@ module Validate
     ships_not_placed_on_same_square?(player, coordinate0, coordinate1)
   end
 
+  def self.valid_coordinates?(user_input)
+    return false unless user_input.class == String
+    user_input = user_input.upcase.strip
+    ('A'..'Z').include?(user_input[0]) &&
+    ('0'..'99').to_a.include?(user_input[1..-1])
+  end
+
   def self.inbounds?(coordinates, difficulty = 4)
     size = (0..3).to_a
     size.include?(coordinates[0]) && size.include?(coordinates[1])
+  end
+
+  def self.valid_pair?(user_input)
+    split = user_input.split(' ').map { |coord| coord.strip }
+    if split.length != 2
+      false
+    elsif !valid_coordinates?(split[0]) || !valid_coordinates?(split[1])
+      false
+    else
+      true
+    end
+  end
+
+  def self.coordinate_translation(human_enter)
+    human_enter = human_enter.upcase.strip
+    cpu_enter = []
+    cpu_enter[0] = human_enter[0].ord - "A".ord
+    cpu_enter[1] = human_enter[1..-1].to_i - 1
+    cpu_enter
+  end
+
+  def self.clean_coordinates(user_input)
+    human_enter = user_input.split(' ').map { |coord| coord.strip }
+    cpu_enter = human_enter.map do |coord|
+      coordinate_translation(coord)
+    end
   end
 
 

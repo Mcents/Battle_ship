@@ -1,9 +1,7 @@
  require 'pry'
 class GameBoard
 
-  attr_accessor :display_board,
-                :board
-
+  attr_reader :board
 
 
     def initialize
@@ -16,7 +14,7 @@ class GameBoard
       end
 
     def display_board
-    puts display = ["===========\n. 1 2 3 4  ", "\nA ", " \nB ", " \nC ", " \nD ", " \n===========\n"]
+    display = ["===========\n. 1 2 3 4  ", "\nA ", " \nB ", " \nC ", " \nD ", " \n===========\n"]
     board.each_with_index do |row, row_index|
       row.each do |column|
         display[row_index + 1] << "#{column} "
