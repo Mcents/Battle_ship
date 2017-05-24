@@ -48,8 +48,23 @@ class BattleShip
 
   def player_shoot
     display_both_boards
-
-
+    @messanger.enter_attack_coords
+    attack_cords = gets.strip
+    valid = Validate.valid_human_attack?(attack_cords, cpu_board.board)
+    until valid
+      @messanger.invalid_attack
+      @messanger.enter_attack_coords
+      attack_cords = gets.strip
+      valid = Validate.valid_human_attack?(attack_cords, cpu_board.board)
+    end
+    attack_cords = Validate.coordinate_translation(attack_cords)
+    cpu_board.board.attack(attack_cords)
+    unless cpu_board.board.board.flatten.include?("S")
+      abort @message.win
+    end
+    display_both_boards
+    @messanger.end_turn
+    gets
   end
 
   def cpu_ship_placement

@@ -31,6 +31,21 @@ class Messanger
     *Coordinates must correspond to the first and last units of the ship. (IE: You can’t place a two unit ship at “A1 A3”)"
   end
 
+  def enter_attack_coords
+    puts "Please enter your coordinates to fire!"
+  end
+
+  def invalid_attack
+    puts "The coordinates you entered are invalid"
+  end
+
+  def end_turn
+    puts "Your turn is over. Please hit enter to pass"
+  end
+
+  def win
+    puts "YOU WIN!"
+  end
 
 
 end

@@ -90,5 +90,20 @@ module Validate
     end
   end
 
+  def self.valid_attack?(cpu_enter, board)
+    row, column = cpu_enter
+    inbounds?(cpu_enter) &&
+    !["H", "M"].include?(board.board[row][column])
+  end
+
+  def self.valid_human_attack?(human_enter, board)
+      if !valid_coordinates?(human_enter)
+        false
+      elsif valid_attack?(coordinate_translation(human_enter), board)
+        true
+      else
+        false
+      end
+  end
 
 end
