@@ -120,12 +120,6 @@ class BattleShip
 
   def display_both_boards
     print "Your Board\n #{player_board.board.display_board}"
-    print "Opponents Board\n#{cpu_board.board.display_board}"
-    #{}.gsub("S", " ")}"
+    print "Opponents Board\n #{cpu_board.board.display_board.gsub("S", " ")}"
   end
-
-
 end
-
-final_test = BattleShip.new
-final_test.start_menu

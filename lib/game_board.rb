@@ -34,6 +34,7 @@ class GameBoard
     row, column = coordinates
     if board[row][column] == "S"
       assign_square(coordinates, "H")
+
     else
       assign_square(coordinates, "M")
     end
