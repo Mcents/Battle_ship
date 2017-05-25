@@ -4,7 +4,6 @@ class GameBoard
 
   attr_reader :board
 
-
     def initialize
       @board=[[" ", " ", " ", " "], [" ", " ", " ", " "], [" ", " ", " ", " "], [" ", " ", " ", " "]]
       @messanger = Messanger.new
@@ -33,9 +32,11 @@ class GameBoard
   def attack(coordinates)
     row, column = coordinates
     if board[row][column] == "S"
+      @messanger.hit
       assign_square(coordinates, "H")
 
     else
+      @messanger.miss
       assign_square(coordinates, "M")
     end
   end

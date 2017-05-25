@@ -8,6 +8,7 @@ class TestGameBoard < Minitest::Test
 
   def test_it_exists
     gboard = GameBoard.new
+
     assert_instance_of GameBoard, gboard
   end
 
@@ -27,7 +28,6 @@ class TestGameBoard < Minitest::Test
 
   def test_if_attack_lands_hit
     gboard = GameBoard.new
-
     gboard.assign_square([2,2], "S")
 
     assert gboard.hit?([2,2])

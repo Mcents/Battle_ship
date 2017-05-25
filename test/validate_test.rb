@@ -72,6 +72,4 @@ class TestValidate < Minitest::Test
 
     assert Validate.valid_human_attack?("B1", player.board)
   end
-
-
 end

@@ -56,7 +56,11 @@ class Messanger
   end
 
   def hit
-    puts "You hit an enemy ship!"
+    puts "HIT!"
+  end
+
+  def miss
+    puts "MISS!"
   end
 
 end

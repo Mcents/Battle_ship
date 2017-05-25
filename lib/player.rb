@@ -15,6 +15,4 @@ class Player
         board.assign_square(coordinate, "S")
       end
     end
-
-
 end

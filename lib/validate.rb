@@ -110,5 +110,4 @@ module Validate
         false
       end
   end
-
 end
