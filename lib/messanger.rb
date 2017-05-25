@@ -40,12 +40,19 @@ class Messanger
   end
 
   def end_turn
-    puts "Your turn is over. Please hit enter to pass"
+    puts "The turn is over. Please hit enter to pass"
+  end
+
+  def cpu_attacked(coords)
+    puts "The cpu has attacked #{coords}"
   end
 
   def win
     puts "YOU WIN!"
   end
 
+  def lose
+    puts "YOU LOSE, SORRY"
+  end
 
 end

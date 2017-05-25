@@ -46,6 +46,18 @@ class TestValidate < Minitest::Test
     refute Validate.valid_ship_placement?(player, 3, [[2, 2], [3, 3]])
   end
 
-  def test_to_refute
+  def test_for_valid_human_attack
+    player = Player.new(GameBoard.new)
+    player.board.assign_square([1, 4], "H")
+
+    refute Validate.valid_human_attack?('e1', player.board)
+  end
+
+  def test_if_coords_are_inbounds
+
+    assert Validate.inbounds?([2,1])
+    refute Validate.inbounds?([8,4])
+  end
+
 
 end

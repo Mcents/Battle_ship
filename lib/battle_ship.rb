@@ -7,13 +7,16 @@ class BattleShip
   attr_accessor :computer,
                 :human,
                 :cpu_board,
-                :player_board
+                :player_board,
+                :start,
+                :finish
 
   def initialize
     @messanger = Messanger.new
     @cpu_board = Player.new(GameBoard.new)
     @player_board = Player.new(GameBoard.new)
-
+    @start = Time.now
+    @finish = finish
   end
 
   def start_menu
@@ -43,7 +46,10 @@ class BattleShip
   end
 
   def game_play
-    player_shoot
+    while true
+      player_shoot
+      cpu_shoot
+    end
   end
 
   def player_shoot
@@ -60,9 +66,29 @@ class BattleShip
     attack_cords = Validate.coordinate_translation(attack_cords)
     cpu_board.board.attack(attack_cords)
     unless cpu_board.board.board.flatten.include?("S")
-      abort @message.win
+     finish = Time.now
+     @messanger.win
+     puts "The match lasted #{finish - start} seconds long"
+     abort
     end
     display_both_boards
+    @messanger.end_turn
+    gets
+  end
+
+  def cpu_shoot
+    valid = false
+    until valid
+      attack_cords = Validate.random_attack_generator(4)
+      valid = Validate.valid_attack?(attack_cords, player_board.board)
+    end
+    player_board.board.attack(attack_cords)
+    @messanger.cpu_attacked(attack_cords)
+    display_both_boards
+    unless player_board.board.board.flatten.include?("S")
+      @messanger.lose
+      abort
+    end
     @messanger.end_turn
     gets
   end
@@ -94,8 +120,11 @@ class BattleShip
 
   def display_both_boards
     print "Your Board\n #{player_board.board.display_board}"
-    print "Opponents Board\n#{cpu_board.board.display_board.gsub("S", " ")}"
+    print "Opponents Board\n#{cpu_board.board.display_board}"
+    #{}.gsub("S", " ")}"
   end
+
+
 end
 
 final_test = BattleShip.new

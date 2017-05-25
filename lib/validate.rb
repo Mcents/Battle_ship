@@ -11,6 +11,11 @@ module Validate
     coordinates
   end
 
+  def self.random_attack_generator(board_size)
+    [rand(board_size), rand(board_size)]
+
+  end
+
   def self.coordinate_fill(coordinate0, coordinate1)
     if coordinate0[0] == coordinate1[0]
       row = 1
