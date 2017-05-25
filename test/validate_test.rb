@@ -59,5 +59,19 @@ class TestValidate < Minitest::Test
     refute Validate.inbounds?([8,4])
   end
 
+  def test_if_can_generate_valid_random_ship_placement
+    player = Player.new(GameBoard.new)
+    coords = Validate.random_coordinate_generator(1,3)
+
+    assert Validate.valid_ship_placement?(player, 2, coords)
+  end
+
+  def test_if_valid_human_attack
+    player = Player.new(GameBoard.new)
+    player.board.assign_square([1,2], "H")
+
+    assert Validate.valid_human_attack?("B1", player.board)
+  end
+
 
 end

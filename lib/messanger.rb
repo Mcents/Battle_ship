@@ -55,4 +55,8 @@ class Messanger
     puts "YOU LOSE, SORRY"
   end
 
+  def hit
+    puts "You hit an enemy ship!"
+  end
+
 end

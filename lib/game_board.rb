@@ -1,4 +1,5 @@
  require 'pry'
+ require_relative 'messanger'
 class GameBoard
 
   attr_reader :board
@@ -6,6 +7,7 @@ class GameBoard
 
     def initialize
       @board=[[" ", " ", " ", " "], [" ", " ", " ", " "], [" ", " ", " ", " "], [" ", " ", " ", " "]]
+      @messanger = Messanger.new
     end
 
     def assign_square(coordinates, status)
